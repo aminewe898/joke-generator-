@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broma del Dia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Broma del dia</h1>
+
+    <div id="jokeBox">Carregant broma...</div>
+
+    <button id="newJoke">Nova broma</button>
+
+    <script>
+    async function loadJoke() {
+    const jokeBox = document.getElementById("jokeBox");
+    jokeBox.textContent = "Carregant...";
+
+    try {
+        const res = await fetch("https://v2.jokeapi.dev/joke/Any?type=single");
+        const data = await res.json();
+        jokeBox.textContent = data.joke;
+    } catch (error) {
+        jokeBox.textContent = "Error carregant la broma.";
+    }
+}
+
+document.getElementById("newJoke").addEventListener("click", loadJoke);
+loadJoke();
+
+
+
+    </script>
+
+</body>
+</html>
